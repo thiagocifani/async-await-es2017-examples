@@ -8,13 +8,12 @@ async function fetchFromGitHub(endpoint) {
 };
 
 async function showUserAndRepos(handle) {
-  const results =  await Promise.all([
+  // instead of results as variable to get the array, we can use ES6 sugar syntax,
+  // assigning variables in the same time.
+  const [user, repos] =  await Promise.all([
     fetchFromGitHub(`/users/${handle}`),
     fetchFromGitHub(`/users/${handle}/repos`)
   ]);
-
-  const user  = results[0];
-  const repos = results[1];
 
   console.log(user.name);
 
