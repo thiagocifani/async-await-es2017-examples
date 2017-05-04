@@ -1,13 +1,16 @@
 const fetch = require('node-fetch');
 
-const fetchGitHubUser = async (handle) => {
-  const url = `https://api.github.com/users/${handle}`;
-  const response = await fetch(url);
-  return await response.json();
-};
+class GitHubApiClient {
+  async fetchUser(handle) {
+    const url      = `https://api.github.com/users/${handle}`;
+    const response = await fetch(url);
+    return await response.json();
+  }
+}
 
 (async () => {
-  const user  = await fetchGitHubUser('thiagocifani');
+  const client = new GitHubApiClient();
+  const user   = await client.fetchUser('thiagocifani');
   console.log(user.name);
   console.log(user.location);
 })();
